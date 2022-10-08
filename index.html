@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+    <script>
+
+        let computerScore=0;
+        let playerScore=0;
+        const choice=["ROCK","PAPER","SCISSORS"];
+        let computerChoice= getComputerChoice();
+        let playerChoice = prompt("Rock, Paper or Scissors? Choose now!").toUpperCase();
+
+        function getComputerChoice(){
+            let randomNumber=Math.floor(Math.random()*3);
+            return choice[randomNumber];
+        }
+
+        function playRound(playerSelection, computerSelection){
+            if(playerSelection=="ROCK"){
+                if(computerSelection=="ROCK"){
+                    alert("Draw! Both have selected Rock")
+                }
+                else if(computerSelection=="PAPER")
+                {
+                    alert("Paper beats Rock, oops you lose.");
+                    computerScore++;
+                }
+                else{
+                    alert("Rock beats scissors, yayyy you win.");
+                    playerScore++;
+                }
+            }
+            else if(playerSelection=="PAPER"){
+                if(computerSelection=="ROCK"){
+                    alert("Paper beats Rock, yayy you win.")
+                    playerScore++;
+                }
+                else if(computerSelection=="PAPER")
+                {
+                    alert("Draw! Both have selected Paper!");
+                }
+                else{
+                    alert("Scissors beats paper, oops you lose.");
+                    computerScore++;
+                }
+            }
+            else{
+                if(computerSelection=="ROCK"){
+                    alert("Rock breats Scissors! opps you lose!")
+                    computerScore++;
+                }
+                else if(computerSelection=="PAPER")
+                {
+                    alert("Scissors beats paper! yayy you win.");
+                    playerScore++;
+                }
+                else{
+                    alert("Draw! Both have selected Scissors.");
+                }
+            }
+        }
+
+        function game(){
+                for(let i=0;i<5;i++){
+                    playRound(playerChoice,computerChoice);
+                    playerChoice = prompt("Rock, Paper or Scissors? Choose now!").toUpperCase();
+                    computerChoice= getComputerChoice();
+                }
+                computerScore>playerScore? alert("Computer wins!!"):alert("Congrats, you've won.")
+        }
+
+       game();
+
+    </script>
+</body>
+</html>
