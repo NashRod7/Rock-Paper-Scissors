@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+    <style>
+        button{
+            color:white;
+            background: coral;
+            width:100px;
+            padding: 10px 0;
+            border: none;
+        }
+    </style>
+</head>
 <body>
+<div class="heading">Let's play Rock, Paper and Scissors.</div>
+<button>Rock</button>
+<button>Paper</button>
+<button>Scissors</button>
+<div class="result"></div>
 
     <script>
 
         let computerScore=0;
         let playerScore=0;
         const choice=["ROCK","PAPER","SCISSORS"];
-        let computerChoice= getComputerChoice();
-        let playerChoice = prompt("Rock, Paper or Scissors? Choose now!").toUpperCase();
+    
+       const buttons=document.querySelectorAll("button");
+       const heading=document.querySelector(".heading"); 
+       const result=document.querySelector(".result");
+        console.log(buttons)
+
+
+       buttons.forEach(button=>{
+        button.addEventListener("click",play)
+       });
+
+       function play(e){ 
+            
+             playerChoice = e.target.textContent.toUpperCase();
+             e.target.style.backgroundColor="blue"; 
+            computerChoice= getComputerChoice();
+            heading.textContent="";
+           
+            playRound(playerChoice,computerChoice);
+            heading.textContent +=`Score:=> User:${playerScore} | Computer:${computerScore}`;
+            
+            setTimeout(()=>{e.target.style.backgroundColor=""; },1000);
+        // computerScore>playerScore? alert("Computer wins!!"):alert("Congrats, you've won.")     
+        if(playerScore ===5)
+            {
+                result.textContent="You Win, Congratulations!"
+                console.log("remove1");
+                remListener();
+
+                return;
+            }
+            else if(computerScore==5)
+            {
+                result.textContent="You Lose, better luck next time.";
+                console.log("remove2");
+                remListener();
+                return;
+            }}
+    
+
+            function remListener(){
+                buttons.forEach(button=>{
+                   button.removeEventListener("click",play)
+                });}
 
         function getComputerChoice(){
             let randomNumber=Math.floor(Math.random()*3);
@@ -19,58 +76,51 @@
         function playRound(playerSelection, computerSelection){
             if(playerSelection=="ROCK"){
                 if(computerSelection=="ROCK"){
-                    alert("Draw! Both have selected Rock")
+                    result.textContent="Draw! Both have selected Rock";
                 }
                 else if(computerSelection=="PAPER")
                 {
-                    alert("Paper beats Rock, oops you lose.");
+                    result.textContent="Paper beats Rock, oops you lose.";
                     computerScore++;
                 }
                 else{
-                    alert("Rock beats scissors, yayyy you win.");
+                    result.textContent="Rock beats scissors, yayyy you win.";
                     playerScore++;
                 }
             }
             else if(playerSelection=="PAPER"){
                 if(computerSelection=="ROCK"){
-                    alert("Paper beats Rock, yayy you win.")
+                    result.textContent="Paper beats Rock, yayy you win.";
                     playerScore++;
                 }
                 else if(computerSelection=="PAPER")
                 {
-                    alert("Draw! Both have selected Paper!");
+                    result.textContent="Draw! Both have selected Paper!";
                 }
                 else{
-                    alert("Scissors beats paper, oops you lose.");
+                    result.textContent="Scissors beats paper, oops you lose.";
                     computerScore++;
                 }
             }
             else{
                 if(computerSelection=="ROCK"){
-                    alert("Rock breats Scissors! opps you lose!")
+                    result.textContent="Rock breats Scissors! opps you lose!";
                     computerScore++;
                 }
                 else if(computerSelection=="PAPER")
                 {
-                    alert("Scissors beats paper! yayy you win.");
+                    result.textContent="Scissors beats paper! yayy you win.";
                     playerScore++;
                 }
                 else{
-                    alert("Draw! Both have selected Scissors.");
+                    result.textContent="Draw! Both have selected Scissors.";
                 }
             }
         }
 
-        function game(){
-                for(let i=0;i<5;i++){
-                    playRound(playerChoice,computerChoice);
-                    playerChoice = prompt("Rock, Paper or Scissors? Choose now!").toUpperCase();
-                    computerChoice= getComputerChoice();
-                }
-                computerScore>playerScore? alert("Computer wins!!"):alert("Congrats, you've won.")
-        }
+        
 
-       game();
+       
 
     </script>
 </body>
